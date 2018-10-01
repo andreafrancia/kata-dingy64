@@ -1,0 +1,115 @@
+Kata: app from scratch (Andrea Francia)
+=======================================
+
+ - Obiettivo del talk?
+   - dare una indicazione di come funziona TDD applicato sul lavoro
+
+ - a chi è rivolto?
+   - a chi vorrebbe usare TDD sul lavoro (e vogliono vedere come funziona)
+   - a chi lo usa e vuole confrontarsi
+
+ - la differenza rispetto ai soliti talk di TDD
+   - è uno sviluppo di una applicazione completa: non solo un kata
+   - è uno sviluppo da zero: parto da una directory vuota 
+
+ - Attenzione:
+   - questo demo è un riassunto, è uno sviluppo che potrei fare in una
+     mezza giornata però compresso in 45'
+      - essendo così compressa tendo a farla velocemente
+      - se vado troppo veloce ditemelo che rallento
+
+ - Tecnologie che uso:
+   - linguaggio di programmazione: Ruby
+   - frameworkd di test: RSpec
+   - Editor: Vim
+
+L'applicazione
+==============
+È un timer per la tecnica del pomodoro da linea di comando
+Si chiama: `dingy`
+
+Le sue feature:
+   1) avvio di una timebox (da 25min)
+   2) mostrare quanto tempo manca alla fine della TimeBox
+   3) persiste (su file di testo, no DB) 
+   4) dipende dal tempo
+
+Esempio di utilizzo
+
+   # start a timebox
+   $ bin/dingy --start
+
+   # see the remaining time
+   $ bin/dingy
+   24:59
+
+   # after exactly 25 min
+   $ bin/dingy
+   00:00
+
+   # after exactly 25 min
+   $ bin/dingy
+   Rang!
+
+Contenuto del talk
+------------------
+
+ - 0) lista delle cose da fare:
+   - avere un eseguibile lanciabile
+   - formatting del tempo rimanente, e.g. 24:59
+   - calcolo del tempo rimanente
+   - lettura da file
+   - scrittura su file del next-alarm
+ - 1) il sistema di testing funziona?
+   - perché?
+     - sono sicuro che il framework è correttamente configurato?
+     - sono sicuro che so riconoscere la barra rossa e la barra verde?
+   - come?
+     - test 1 == 2 che deve fallire
+     - test 1 == 1 che deve passare
+ - 2) come lancio un eseguibile?
+   - il primo test richiede di lanciare l'eseguibile bin/dingy
+   - sono già capace di lanciare gli eseguibili? o qualche dubbio? 
+   - imparo prima ad usare la libreria di lancio eseguibili su un comando che
+     so come funziona (echo pippo)
+ - 3) wiring del walking skeleton
+   - quali sono gli input e gli output del programma
+   - riesco a leggere gli input?
+   - riesco a scrivere gli output?
+   - scrivo i test sul wiring dell'I/O senza toccare (ancora) la logica
+ - 4) come si scrivono i test quando c'è di mezzo il tempo che passa?
+   - comincio con l'usare una variabile di ambiente `NOW` che indica l'istante
+     attuale
+ - 5) come passo una variabile di ambiente?
+ - 6) come passo le info passando da file?
+ - 7) sviluppo della logica
+   - la logica la sviluppo in test di unità senza legarmi al test di
+     integrazione
+ - 8) come formattare il tempo rimanente MM:SS?
+   - il pattern "fake it 'til you make it"
+   - il pattern 'nego il test per fare refactor'
+ - 9) come calcolo il tempo rimanente?
+   - il pattern "test as a REPL"
+ - 10) wiring della logica sviluppata con test di unità nell'eseguibile
+ - refactor dei test di integrazione per supportare comandi diversi
+ - test del --start che non scrive output
+ - test del --start che crea un file
+ - attenzione non è rosso
+ - test del --start che scrive nel file il valore giusto
+ - prova dell'eseguibile
+ - aggiunta della lettura di 'now' dal sistema
+
+Video della presentazione alla NoSlidesConf
+-------------------------------------------
+
+https://www.youtube.com/watch?v=BU8mbXFJTAI&
+
+Se ti è piaciuta la presentazione
+---------------------------------
+
+Scrivimi su twitter: @andreafrancia
+Iscriviti alla mia newsletter: su http://andreafrancia.it/
+Vieni a trovare me e altri professionisti all'TDD Milano
+https://www.meetup.com/it-IT/TDD-Milano/
+
+eof
